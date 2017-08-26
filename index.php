@@ -4,6 +4,10 @@ include($_SERVER['DOCUMENT_ROOT'] . '/migracao/model/Produtos.php');
 
 $dataOld = new Dadosantigos();
 $dataNew = new Produtos();
+$dataOld->migrar();
+//print "<pre>";
+//print_r($dataOld->migrar());
+//die();
 ?>
 
 <html>

@@ -18,9 +18,31 @@ class Dadosantigos {
     public function dataLst() {
         $con = new DB($this->table);
         $con->setAtribs(array('codigo', 'titulo', 'cor', 'tamanho'));
-        $data = $con->lst();
+        $data = $con->readLst();
 
         return $data;
+    }
+
+    public function migrar() {
+        $con = new DB($this->table);
+        $con->setAtribs(array('codigo', 'titulo', 'cor', 'tamanho'));
+        $data = $con->readLst();
+
+        foreach ($data as $value) {
+            
+            for($i=0;$i<count($value->cor);$i++){
+                    print '<pre>';
+            print_R($value->cor[$i]);
+            die();
+                $cor = new DB('cores');
+                $cor->setAtribs(array('titulo'));
+                $cor->create('cor');
+                $cor->setValue($value->cor[$i]);
+            }
+            $d[] = $value->cor;
+        }
+
+        return $d;
     }
 
 }

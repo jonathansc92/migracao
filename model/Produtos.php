@@ -17,12 +17,12 @@ class Produtos {
 
     public function dataLst() {
         $con = new DB($this->table);
-        $data = $con->lst();
+        $data = $con->readLst();
 
         while ($row = $data->fetch(PDO::FETCH_OBJ)) {
 
-            $row->codigo . '<br />';
-            $row->titulo . '<br />';
+            $row->codigo;
+            $row->titulo;
 
             $rowLst[] = $row;
         }
