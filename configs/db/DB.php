@@ -36,15 +36,11 @@ class DB {
         $data->execute(array($param));
         $rows = $data->fetchAll(PDO::FETCH_ASSOC);
         
-
                 
         foreach ($rows as $data) {
 
             $id = $data['id'];
         }
-// print '<pre>';
-//        print_R($id);
-//        die();
        
         return $id;
     }

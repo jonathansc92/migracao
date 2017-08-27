@@ -28,6 +28,12 @@ class Dadosantigos {
         return $data;
     }
 
+    public function getID($param) {
+
+        $dados_antigos = new DB('dados_antigos');
+        $dados_antigos->setID($param);
+    }
+
     public function migrar() {
 
         $cores = new Cores();
@@ -44,19 +50,19 @@ class Dadosantigos {
             $codes[$value->titulo] = $value->codigo;
         }
 
-//        foreach ($colors as $color) {
-//            $cores->insert($color);
-//        }
-//
-//        foreach ($sizes as $size) {
-//            $tamanhos->insert($size);
-//        }
-//
-//        foreach ($products as $product) {
-//            foreach ($codes as $code) {
-//                $produtos->insert($code, $product);
-//            }
-//        }
+        foreach ($colors as $color) {
+            $cores->insert($color);
+        }
+
+        foreach ($sizes as $size) {
+            $tamanhos->insert($size);
+        }
+
+        foreach ($products as $product) {
+            foreach ($codes as $code) {
+                $produtos->insert($code, $product);
+            }
+        }
 // print '<pre>';
 //                    print_R($produtos->dataLst());
 //                    die();
@@ -68,10 +74,9 @@ class Dadosantigos {
                 if (count($cores->dataLst()) != 0) {
 
 
-//                    $produtoscores->insert($cores->getID($dados->cor), $idProduto);
-                    $produtostamanhos->insert($tamanhos->getID($dados->tamanho), $idProduto);
+                    $produtoscores->insert($cores->getID($dados->cor), $idProduto);
+//                    $produtostamanhos->insert($tamanhos->getID($dados->tamanho), $idProduto);
                 }
-
             }
         }
     }

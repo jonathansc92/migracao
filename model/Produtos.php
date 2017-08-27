@@ -31,7 +31,7 @@ class Produtos {
     public function getID($param) {
 
         $produtos = new DB('produtos');
-        return $produtos->setID($param);
+        $produtos->setID($param);
     }
 
 }

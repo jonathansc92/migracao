@@ -22,7 +22,7 @@ class Tamanhos {
      public function getID($param) {
 
         $tamanhos = new DB('tamanhos');
-        return $tamanhos->setID($param);
+        $tamanhos->setID($param);
     }
 
 }

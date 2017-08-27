@@ -22,7 +22,7 @@ class Cores {
     public function getID($param) {
 
         $cores = new DB('cores');
-        return $cores->setID($param);
+        $cores->setID($param);
     }
 
 }
