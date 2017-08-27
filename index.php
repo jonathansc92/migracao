@@ -5,18 +5,23 @@ include($_SERVER['DOCUMENT_ROOT'] . '/migracao/model/Produtos.php');
 $dataOld = new Dadosantigos();
 $dataNew = new Produtos();
 $dataOld->migrar();
+//die();
 //print "<pre>";
 //print_r($dataOld->migrar());
 //die();
 ?>
-
-<html>
-
-
-    <title>
-        <head> </head>
-    </title>
-
+<!DOCTYPE html>
+<html lang="pt-br">
+    <head> 
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="description" content="">
+        <meta name="author" content="">
+        <title>
+            Migração
+        </title>
+    </head>
     <body>
 
         <div id='wrapper'>
@@ -51,7 +56,7 @@ $dataOld->migrar();
                                             <tr>
                                                 <th>#</th>
                                                 <th>Produto</th>
-                                                <th>cor</th>
+                                                <th>Cor</th>
                                                 <th>Tamanho</th>
 
                                             </tr>
@@ -91,7 +96,7 @@ $dataOld->migrar();
                                             <tr>
                                                 <th>#</th>
                                                 <th>Produto</th>
-                                                <th>cor</th>
+                                                <th>Cor</th>
                                                 <th>Tamanho</th>
 
                                             </tr>

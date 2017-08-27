@@ -1,7 +1,6 @@
 <?php
 
 //include($_SERVER['DOCUMENT_ROOT'] . '/migracao/configs/db/DB.php');
-
 //$m = $_SERVER['DOCUMENT_ROOT'] . '/migracao/configs/db/DB.php';
 //
 //print "<pre>";
@@ -16,18 +15,23 @@ class Produtos {
 //}
 
     public function dataLst() {
-        $con = new DB($this->table);
-        $data = $con->readLst();
+        $produtos = new DB('produtos');
+        $produtos->setAtribs(array('codigo', 'titulo'));
+        $produtosdata = $produtos->readLst();
 
-        while ($row = $data->fetch(PDO::FETCH_OBJ)) {
+        return $produtosdata;
+    }
 
-            $row->codigo;
-            $row->titulo;
+    public function insert($code, $produto) {
+        $produtos = new DB('produtos');
+        $produtos->setAtribs(array('codigo', 'titulo'));
+        $produtos->create(array($code, $produto));
+    }
 
-            $rowLst[] = $row;
-        }
+    public function getID($param) {
 
-        return $rowLst;
+        $produtos = new DB('produtos');
+        return $produtos->setID($param);
     }
 
 }

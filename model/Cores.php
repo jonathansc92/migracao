@@ -1,33 +1,28 @@
 <?php
 
-//include($_SERVER['DOCUMENT_ROOT'] . '/migracao/configs/db/DB.php');
+class Cores {
 
-//$m = $_SERVER['DOCUMENT_ROOT'] . '/migracao/configs/db/DB.php';
-//
-//print "<pre>";
-//print_r($m);
-//die();
-class Produtos {
-
-    public $table = 'produtos';
-
-//public function __construct(){
-//    $this->table = ''
-//}
+    public $table = 'cores';
 
     public function dataLst() {
-        $con = new DB($this->table);
-        $data = $con->lst();
 
-        while ($row = $data->fetch(PDO::FETCH_OBJ)) {
+        $cores = new DB('cores');
+        $cores->setAtribs(array('titulo'));
+        $coresdata = $cores->readLst();
 
-            $row->codigo . '<br />';
-            $row->titulo . '<br />';
+        return $coresdata;
+    }
 
-            $rowLst[] = $row;
-        }
+    public function insert($value) {
+        $cores = new DB('cores');
+        $cores->setAtribs(array('titulo'));
+        $cores->create(array($value));
+    }
 
-        return $rowLst;
+    public function getID($param) {
+
+        $cores = new DB('cores');
+        return $cores->setID($param);
     }
 
 }
