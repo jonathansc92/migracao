@@ -1,10 +1,13 @@
 <?php
 include($_SERVER['DOCUMENT_ROOT'] . '/migracao/model/Dadosantigos.php');
 include($_SERVER['DOCUMENT_ROOT'] . '/migracao/model/Produtos.php');
+//include($_SERVER['DOCUMENT_ROOT'] . '/migracao/model/Produtostamanhos.php');
 
 $dataOld = new Dadosantigos();
 $dataNew = new Produtos();
-$dataOld->migrar();
+$migrados = new Produtostamanhos();
+
+$dataOld->migration();
 //die();
 //print "<pre>";
 //print_r($dataOld->migrar());
@@ -38,15 +41,15 @@ $dataOld->migrar();
                     <!-- /.col-lg-12 -->
                 </div>
 
-                <div class='row'>
+<!--                <div class='row'>
                     <a href='#' class='btn btn-primary pull-right'><i class="fa fa-database" aria-hidden="true"></i> Migration</a>
-                </div>
+                </div>-->
 
                 <div class="row">
                     <div class="col-lg-6">
                         <div class="panel panel-default">
                             <div class="panel-heading">
-                                Dados Antigos
+                                <i class='fa fa-database'></i> Dados Antigos
                             </div>
                             <!-- /.panel-heading -->
                             <div class="panel-body">
@@ -86,12 +89,12 @@ $dataOld->migrar();
                     <div class="col-lg-6">
                         <div class="panel panel-default">
                             <div class="panel-heading">
-                                Dados Migrados
+                                <i class='fa fa-database'></i> Dados Migrados
                             </div>
                             <!-- /.panel-heading -->
                             <div class="panel-body">
                                 <div class="table-responsive">
-                                    <table class="table">
+                                    <table class="table table-striped table-bordered table-hover">
                                         <thead>
                                             <tr>
                                                 <th>#</th>
@@ -107,13 +110,14 @@ $dataOld->migrar();
                                         <tbody>
 
                                             <?php
-//                                        foreach ($dataNew->dataLst() as $value) {
-////        print "<pre>";
-////        print_r($value);
-////        die();
-//                                            echo "<tr><td>" . $value->codigo . "</td>";
-//                                            echo "<td>" . $value->titulo . "</td>";
-//                                        }
+                                            if (count($migrados->dataLst()) <> 0) {
+                                                foreach ($migrados->dataLst() as $value) {
+                                                    echo "<tr><td>" . $value->codigo . "</td>";
+                                                    echo "<td>" . $value->produto . "</td>";
+                                                    echo "<td>" . $value->cor . "</td>";
+                                                    echo "<td>" . $value->tamanho . "</td>";
+                                                }
+                                            }
                                             ?>
                                         </tbody>
                                     </table>

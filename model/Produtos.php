@@ -1,50 +1,47 @@
 <?php
 
-//include($_SERVER['DOCUMENT_ROOT'] . '/migracao/configs/db/DB.php');
-//$m = $_SERVER['DOCUMENT_ROOT'] . '/migracao/configs/db/DB.php';
-//
-//print "<pre>";
-//print_r($m);
-//die();
 class Produtos {
 
     public $table = 'produtos';
 
-//public function __construct(){
-//    $this->table = ''
-//}
-
     public function dataLst() {
-        $produtos = new DB('produtos');
+        $produtos = new DB($this->table);
         $produtos->setAtribs(array('codigo', 'titulo'));
         $produtosdata = $produtos->readLst();
 
         return $produtosdata;
     }
 
-    public function insert($code, $produto) {
-        $produtos = new DB('produtos');
+    public function migraProdutos() {
+        $produtos = new DB($this->table);
         $produtos->setAtribs(array('codigo', 'titulo'));
-        $produtos->create(array($code, $produto));
+
+        $antigos = new DB('dados_antigos');
+        $antigos->setAtribs(array('codigo', 'titulo'));
+        $antigos->setDistinct();
+        $antigos->readLst();
+
+//        foreach ($antigos->readLst() as $value) {
+        for ($i = 0; $i < count($antigos->readLst()); $i++) {
+            $products[$antigos->readLst()[$i]->titulo] = $antigos->readLst()[$i]->titulo;
+            $codes[$antigos->readLst()[$i]->codigo] = $antigos->readLst()[$i]->codigo;
+            
+            $produtos->create(array($codes[$antigos->readLst()[$i]->codigo], $products[$antigos->readLst()[$i]->titulo]));
+        }
+
+
+//        foreach ($products as $product) {
+//            foreach ($codes as $code) {
+//                $produtos->create(array($code, $product));
+//            }
+//        }
     }
 
     public function getID($param) {
 
         $produtos = new DB('produtos');
-        $produtos->setID($param);
+        return $produtos->setID(array($param));
+
     }
 
 }
-
-//$rs = $con->query('SELECT * FROM dados_antigos');
-//
-//
-//while ($row = $rs->fetch(PDO::FETCH_OBJ)) {
-//
-//    print "<pre>";
-//    print_R($row);
-//    die();
-//    echo $row->idpessoa . '<br />';
-//    echo $row->nome . '<br />';
-//    echo $row->email . '<br />';
-//}

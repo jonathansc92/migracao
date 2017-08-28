@@ -13,16 +13,33 @@ class Cores {
         return $coresdata;
     }
 
-    public function insert($value) {
+    public function migraCores() {
         $cores = new DB('cores');
         $cores->setAtribs(array('titulo'));
-        $cores->create(array($value));
+
+        $antigos = new DB('dados_antigos');
+        $antigos->setAtribs(array('cor'));
+        $antigos->setDistinct();
+        $antigos->readLst();
+
+        foreach ($antigos->readLst() as $value) {
+            $colors[$value->cor] = $value->cor;
+        }
+
+
+        foreach ($colors as $color) {
+            $cores->create(array($color));
+        }
     }
 
     public function getID($param) {
 
         $cores = new DB('cores');
-        $cores->setID($param);
+       return $cores->setID(array($param));
+
+//         print "<pre>";
+//        print_R($cores->setID($param));
+//        die();
     }
 
 }
